@@ -17,12 +17,12 @@ const Sidebar = () => {
         { title: "Finance", link: '/finance', icon: "fa-solid fa-arrow-trend-up" },
         { title: "Accounts", link: '/accounts', icon: "fa-solid fa-building-columns" },
         { title: "Complaints", link: '/complaints', gap: true, icon: 'fa-solid fa-person-circle-question' },
-        { title: "Team", link: 'team', icon: 'fa-solid fa-users' },
-        { title: "Clients", link: 'clients', icon: 'fa-solid fa-briefcase' },
-        { title: "New Leads", link: 'new-leads', icon: 'fa-solid fa-filter' },
-        { title: "Messages", link: 'messages', icon: 'fa-regular fa-comments' },
-        { title: "Hierarchy", link: 'hierarchy', icon: 'fa-solid fa-sitemap' },
-        { title: "Settings", link: 'settings', icon: 'fa-solid fa-gear' },
+        { title: "Team", link: '/team', icon: 'fa-solid fa-users' },
+        { title: "Clients", link: '/clients', icon: 'fa-solid fa-briefcase' },
+        { title: "New Leads", link: '/new-leads', icon: 'fa-solid fa-filter' },
+        { title: "Messages", link: '/messages', icon: 'fa-regular fa-comments' },
+        { title: "Hierarchy", link: '/hierarchy', icon: 'fa-solid fa-sitemap' },
+        { title: "Settings", link: '/settings', icon: 'fa-solid fa-gear' },
 
 
     ]
