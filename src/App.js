@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route, Navigate } from "react-router-dom";
-import Sidebar from './components/Sidebar';
+import { Sidebar, NavBar } from './components';
 import { Accounts, Clients, Complaints, Dashboard, Finance, Hierarchy, HRM, Messages, NewLeads, ProjectManager, Projects, Settings, Team } from './Pages'
 
 export default function App() {
@@ -21,7 +21,9 @@ export default function App() {
           <div className='flex' >
             <Sidebar />
 
+
             <div className='p-7 flex-1 h-screen'>
+              <NavBar />
 
 
               <Routes>

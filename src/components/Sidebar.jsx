@@ -23,9 +23,8 @@ const Sidebar = () => {
         { title: "Messages", link: '/messages', icon: 'fa-regular fa-comments' },
         { title: "Hierarchy", link: '/hierarchy', icon: 'fa-solid fa-sitemap' },
         { title: "Settings", link: '/settings', icon: 'fa-solid fa-gear' },
-
-
     ]
+    
     return (
         <div className={`${open ? "w-72" : "w-20"} duration-300 h-screen p-5 pt-8 bg-gray-50 relative`}>
 
