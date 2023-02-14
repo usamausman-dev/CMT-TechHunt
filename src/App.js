@@ -22,7 +22,7 @@ export default function App() {
             <Sidebar />
 
 
-            <div className='p-7 flex-1 h-screen'>
+            <div className='p-7 flex-1 h-screen overflow-y-scroll'>
               <NavBar />
 
 

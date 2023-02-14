@@ -30,8 +30,8 @@ const Sidebar = () => {
 
             <MdArrowBackIosNew color='#72c179' size={27} onClick={() => setOpen(!open)} className={`absolute cursor-pointer rounded-full -right-3 top-9 w-7 border-2 p-1.5 bg-white  ${!open && "rotate-180"}`} />
             <div className='flex items-center'>
-                <img src={Logo} className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"}`} alt="logo" />
-                <img src={Logo1} className={`pt-2 pl-2 text-black origin-left font-medium text-xl duration-300 ${!open && "scale-0"}`} />
+                <img src={Logo} alt="logo" className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"}`} />
+                <img src={Logo1} alt="logotext" className={`pt-2 pl-2 text-black origin-left font-medium text-xl duration-300 ${!open && "scale-0"}`} />
 
 
             </div>
