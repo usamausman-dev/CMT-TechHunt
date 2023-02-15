@@ -10,24 +10,24 @@ const NavBar = () => {
       </div>
 
       <div className='flex items-center border-green-700/20 border-2 text-gray-300 bg-gray-50 px-6 py-2 rounded-md'>
-        <div className='mr-4'><i class="fa-solid fa-magnifying-glass"></i></div>
+        <div className='mr-4'><i className="fa-solid fa-magnifying-glass"></i></div>
         <input className='bg-transparent focus:border-0 p-2' type="text" placeholder='Search' />
-        <div className='ml-4'><i class="fa-solid fa-filter"></i></div>
+        <div className='ml-4'><i className="fa-solid fa-filter"></i></div>
       </div>
       <div className='flex items-center'>
         <div>
-          <i class="fa-regular fa-clock p-4 mx-4  rounded-md shadow-sm bg-gray-50 border-green-700/20 border-2">
+          <i className="fa-regular fa-clock p-4 mx-4  rounded-md shadow-sm bg-gray-50 border-green-700/20 border-2">
           </i>
           {/* <div className='w-[10px] h-[10px] bg-red-500 absolute top-12 right-[23rem] rounded-full'></div> */}
         </div>
 
         <div>
-          <i class="fa-solid fa-bullhorn p-4 mx-4 rounded-md shadow-sm bg-gray-50 border-green-700/20 border-2"></i>
+          <i className="fa-solid fa-bullhorn p-4 mx-4 rounded-md shadow-sm bg-gray-50 border-green-700/20 border-2"></i>
           {/* <div className='w-[10px] h-[10px] bg-red-500 absolute top-12 right-[18rem] rounded-full'></div> */}
         </div>
 
         <div>
-          <i class="fa-regular fa-bell p-4 mx-4 rounded-md shadow-sm bg-gray-50 border-green-700/20 border-2"></i>
+          <i className="fa-regular fa-bell p-4 mx-4 rounded-md shadow-sm bg-gray-50 border-green-700/20 border-2"></i>
           {/* <div className='w-[10px] h-[10px] bg-red-500 absolute top-12 right-[13rem] rounded-full'></div> */}
         </div>
         <div className='mx-4 font-semibold'>TecHunt</div>

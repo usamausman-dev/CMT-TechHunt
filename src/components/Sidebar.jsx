@@ -39,11 +39,11 @@ const Sidebar = () => {
             <ul className='pt-6'>
                 {Menus.map((menu, index) => {
                     return (
-                        <Link to={menu.link}>
+                        <Link to={menu.link} key={index}>
                             <li
                                 key={index}
                                 className={`group text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer  p-2 hover:bg-light-white rounded-md  ${menu.title === 'Settings' ? 'fixed bottom-5' : ''}`}>
-                                <i class={menu.icon}></i>
+                                <i className={menu.icon}></i>
                                 {/* <img alt={`logo-${index}`} src={menu.src} /> */}
                                 <span
                                     style={{ transitionDelay: `${index + 1}00ms` }}

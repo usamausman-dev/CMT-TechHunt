@@ -10,12 +10,12 @@ const Projects = () => {
 
                 <div className='flex items-center'>
                     <div className='flex items-center border-green-700/20 border-2 text-gray-300 bg-gray-50 px-6 py-2 rounded-md'>
-                        <div className='mr-4'><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <div className='mr-4'><i className="fa-solid fa-magnifying-glass"></i></div>
                         <input className='bg-transparent focus:border-0 p-2' type="text" placeholder='Search' />
-                        <div className='ml-4'><i class="fa-solid fa-filter"></i></div>
+                        <div className='ml-4'><i className="fa-solid fa-filter"></i></div>
 
                     </div>
-                    <button className='ml-6 bg-[#60a065] text-white px-4 py-2 rounded-md'><i class="fa-solid fa-plus"></i></button>
+                    <button className='ml-6 bg-[#60a065] text-white px-4 py-2 rounded-md'><i className="fa-solid fa-plus"></i></button>
 
                 </div>
             </div>

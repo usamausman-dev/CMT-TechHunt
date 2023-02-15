@@ -1,15 +1,11 @@
 import React from 'react'
-import {Cards , Projects , SocialMedia} from '../components'
+import { Cards, Projects, SocialMedia, Todos, Events,Calendar } from '../components'
 import AllIcon from '../assests/icons/all.png'
 import Finished from '../assests/icons/finished.png'
 import Ongoing from '../assests/icons/ongoing.png'
 import Sales from '../assests/icons/sales.png'
 import Present from '../assests/icons/present.png'
 import Employees from '../assests/icons/employee.png'
-
-
-
-
 
 const Dashboard = () => {
 
@@ -126,21 +122,21 @@ const Dashboard = () => {
             <div className='p-7'>
                 <h1 className='text-2xl font-bold'>Employee Status</h1>
                 <div className='flex justify-between py-6'>
-                    <div className='border-2 border-green-700/20 py-6 px-4 rounded-lg bg-gray-50 mx-2'>Calendar</div>
-                    <div className='border-2 border-green-700/20 grow py-6 px-4 rounded-lg bg-gray-50 mx-2'>Events</div>
-                    <div className='border-2 border-green-700/20 py-6 px-4 rounded-lg bg-gray-50 mx-2'>To Do</div>
+                    <div className='border-2 border-green-700/20 py-6 px-4 rounded-lg bg-gray-50 mx-2'><Calendar/></div>
+                    <div className='border-2 border-green-700/20 grow py-6 px-4 rounded-lg bg-gray-50 mx-2'><Events /></div>
+                    <div className='border-2 border-green-700/20 py-6 px-4 rounded-lg  mx-2'><Todos /></div>
 
                 </div>
             </div>
 
 
 
-            <Projects/>
+            <Projects />
 
-            <SocialMedia/>
-            
+            <SocialMedia />
 
-            
+
+
         </>
     )
 }
