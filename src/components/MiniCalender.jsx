@@ -1,4 +1,4 @@
-import React , {useState} from 'react'
+import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -7,7 +7,7 @@ import { PickersDay } from '@mui/x-date-pickers';
 import '../styles/calendar.css'
 
 const MiniCalender = () => {
-    
+
     const [value, setValue] = useState(new Date())
 
     const highlightDates = [
@@ -18,11 +18,7 @@ const MiniCalender = () => {
 
 
     const renderDay = (date, _, dayInCurrentMonth) => {
-        const highlight = highlightDates.find(highlightDate =>
-            date.getDate() === highlightDate.date.getDate()
-            && date.getMonth() === highlightDate.date.getMonth()
-            && date.getFullYear() === highlightDate.date.getFullYear()
-        );
+        const highlight = highlightDates.find(highlightDate => date.getDate() === highlightDate.date.getDate() && date.getMonth() === highlightDate.date.getMonth() && date.getFullYear() === highlightDate.date.getFullYear());
 
         if (highlight && dayInCurrentMonth) {
             return (

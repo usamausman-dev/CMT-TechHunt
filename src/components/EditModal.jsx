@@ -1,12 +1,23 @@
 import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import EditModal from './EditModal';
 
-const Events = () => {
+const EditModal = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 800,
+        height: 800,
+        bgcolor: 'background.paper',
+        borderRadius: '3%',
+        boxShadow: 24,
+        p: 4,
+    };
 
     const [title, setTitle] = useState("")
     const [startDate, setStartDate] = useState(new Date().toISOString().substr(0, 10));
@@ -41,143 +52,9 @@ const Events = () => {
         setInviteList(newInvites)
     }
 
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 800,
-        height: 800,
-        bgcolor: 'background.paper',
-        borderRadius: '3%',
-        boxShadow: 24,
-        p: 4,
-    };
-
-    const allEvents = [
-        {
-            title: 'ShowCine Meeting',
-            time: '10:45:16 Am',
-            date: '07 Nov 2022',
-            status: 'Pending'
-        },
-        {
-            title: 'ShowCine Meeting',
-            time: '10:45:16 Am',
-            date: '07 Nov 2022',
-            status: 'Pending'
-        },
-        {
-            title: 'ShowCine Meeting',
-            time: '10:45:16 Am',
-            date: '07 Nov 2022',
-            status: 'Completed'
-        },
-        {
-            title: 'ShowCine Meeting',
-            time: '10:45:16 Am',
-            date: '07 Nov 2022',
-            status: 'Pending'
-        },
-        {
-            title: 'ShowCine Meeting',
-            time: '10:45:16 Am',
-            date: '07 Nov 2022',
-            status: 'Pending'
-        },
-        {
-            title: 'ShowCine Meeting',
-            time: '10:45:16 Am',
-            date: '07 Nov 2022',
-            status: 'Completed'
-        },
-        {
-            title: 'ShowCine Meeting',
-            time: '10:45:16 Am',
-            date: '07 Nov 2022',
-            status: 'Pending'
-        },
-        {
-            title: 'ShowCine Meeting',
-            time: '10:45:16 Am',
-            date: '07 Nov 2022',
-            status: 'Completed'
-        },
-        {
-            title: 'ShowCine Meeting',
-            time: '10:45:16 Am',
-            date: '07 Nov 2022',
-            status: 'Pending'
-        },
-        {
-            title: 'ShowCine Meeting',
-            time: '10:45:16 Am',
-            date: '07 Nov 2022',
-            status: 'Completed'
-        },
-        {
-            title: 'ShowCine Meeting',
-            time: '10:45:16 Am',
-            date: '07 Nov 2022',
-            status: 'Pending'
-        },
-        {
-            title: 'ShowCine Meeting',
-            time: '10:45:16 Am',
-            date: '07 Nov 2022',
-            status: 'Completed'
-        },
-
-    ]
-
-    const deleteEvent = (id) => {
-        console.log(id)
-
-    }
-
-
     return (
-        <div className='overflow-y-scroll h-96 pr-2'>
-            <div className='flex items-center justify-between'>
-                <h1 className='text-xl font-semibold'>Events</h1>
-                <div className='flex items-center'>
-                    <div className='flex items-center border-green-700/20 border-2 text-gray-300 bg-gray-50 px-6 rounded-md'>
-                        <div className='mr-4'><i className="fa-solid fa-magnifying-glass"></i></div>
-                        <input className='bg-transparent focus:border-0 p-2' type="text" placeholder='Search' />
-                        <div className='ml-4'><i className="fa-solid fa-filter"></i></div>
-                    </div>
-                    <button onClick={handleOpen} className='ml-6 bg-[#60a065] text-white px-4 py-2 rounded-md'><i className="fa-solid fa-plus"></i></button>
-                </div>
-            </div>
-
-            <div>
-                <table className='w-100 p-4 border-separate text-center border-spacing-y-3.5' width="100%">
-
-                    <tbody>
-
-                        {
-                            allEvents.map((event, key) => {
-                                return (
-                                    <tr key={key}>
-                                        <td><div className={`w-4 h-4 rounded-full ${event.status === 'Completed' ? ('bg-green-500') : (event.status === 'Pending' ? ('bg-yellow-500') : ('bg-green-500'))}`}></div></td>
-                                        <td>{event.title}</td>
-                                        <td>{event.time}</td>
-                                        <td>{event.date}</td>
-                                        <td className={`${event.status === 'Completed' ? ('text-green-500') : (event.status === 'Pending' ? ('text-yellow-500') : ('text-yellgreen'))}`}>{event.status}</td>
-                                        <td><EditModal/></td>
-                                        <td><button onClick={() => deleteEvent(key)} className='mx-2'><i className="fa-solid fa-trash"></i></button></td>
-                                    </tr>
-                                )
-                            })
-                        }
-
-
-
-
-                    </tbody>
-                </table>
-            </div>
-
+        <>
+            <button onClick={handleOpen} className='mx-2'><i className="fa-solid fa-pen-to-square"></i></button>
             <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                 <Box sx={style}>
                     <div className='flex justify-between items-center mb-8'>
@@ -266,9 +143,8 @@ const Events = () => {
 
                 </Box>
             </Modal>
-
-        </div>
+        </>
     )
 }
 
-export default Events
+export default EditModal

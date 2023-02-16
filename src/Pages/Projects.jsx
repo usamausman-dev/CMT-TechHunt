@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Tab } from '@headlessui/react'
-import {Modal} from '../components'
+// import {EditModal} from '../components'
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
 const Projects = () => {
-    const [modal, showModal] = useState(false)
+    // const [modal, showModal] = useState(false)
     return (
         <div >
             <Tab.Group>
@@ -19,12 +19,12 @@ const Projects = () => {
                         selected ? 'text-[#72c179] border-b-4 rounded-none border-[#72c179]' : '')
                     }>ORDERS</Tab>
 
-                    <button onClick={() => showModal(true)} className='fixed right-20 px-4 py-2 font-semibold rounded-md bg-[#72c179] text-white'>Create +</button>
+                    {/* <button onClick={() => showModal(true)} className='fixed right-20 px-4 py-2 font-semibold rounded-md bg-[#72c179] text-white'>Create +</button> */}
                 </Tab.List>
 
-                {
-                    modal && <Modal showModal={showModal} />
-                }
+                {/* {
+                    modal && <EditModal showModal={showModal} />
+                } */}
 
                 <hr className='' />
                 <Tab.Panels>

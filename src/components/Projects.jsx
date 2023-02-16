@@ -104,10 +104,6 @@ const Projects = () => {
                 </table>
 
             </div>
-
-
-
-
         </div >
     )
 }
