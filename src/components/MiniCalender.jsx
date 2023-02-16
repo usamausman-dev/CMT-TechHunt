@@ -26,7 +26,7 @@ const MiniCalender = () => {
 
         if (highlight && dayInCurrentMonth) {
             return (
-                <div className={highlight.class}>
+                <div className={highlight.class} key={date.toString()}>
                     {/* {date.getDate()} */}
                     <PickersDay {...dayInCurrentMonth} />
                 </div>
