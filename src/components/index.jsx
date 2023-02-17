@@ -9,6 +9,8 @@ export { default as Events } from './Events';
 export { default as Calendar } from './Calendar';
 export { default as AddProjectModal } from './AddProjectModal';
 export { default as AddScrumModal } from './AddScrumModal';
+export { default as MonthlyGraph } from './MonthlyGraph';
+
 
 
 
