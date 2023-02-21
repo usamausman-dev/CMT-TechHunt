@@ -30,9 +30,10 @@ const AddProjectModal = () => {
     const [startDate, setStartDate] = useState(new Date().toISOString().substr(0, 10));
     const [endDate, setEndDate] = useState('');
     const [personName, setPersonName] = useState([]);
-    const handleChange = (event, newValue) => setPersonName(newValue)
-    const [projectOwner, setProjectOwner] = useState('')
+    const [ownerName, setOwnerName] = useState([]);
 
+    const handleChange = (event, newValue) => setPersonName(newValue)
+    const handleOwner = (event, newValue) => setOwnerName(newValue)
 
     const [privacy, setPrivacy] = useState(
         [
@@ -48,11 +49,11 @@ const AddProjectModal = () => {
                 icon: 'fa-solid fa-lock'
             },
 
-            {
-                name: 'Secret',
-                details: 'Nobody can view this team in the list. Team membership is by invitation only.',
-                icon: 'fa-solid fa-eye'
-            }
+            // {
+            //     name: 'Secret',
+            //     details: 'Nobody can view this team in the list. Team membership is by invitation only.',
+            //     icon: 'fa-solid fa-eye'
+            // }
         ]
     )
 
@@ -75,7 +76,7 @@ const AddProjectModal = () => {
 
 
     const handleEvent = () => {
-        const payload = { projectName, projectOwner, description, startDate, endDate, personName, selectedPrivacy, selectedFeatures, selectedFeature }
+        const payload = { projectName, ownerName, description, startDate, endDate, personName, selectedPrivacy, selectedFeatures, selectedFeature }
         console.log(payload)
     }
 
@@ -85,8 +86,7 @@ const AddProjectModal = () => {
         setStartDate(new Date().toISOString().substr(0, 10))
         setEndDate('')
         setPersonName([])
-
-        setProjectOwner('')
+        setOwnerName([])
         setSelectedPrivacy([])
         setSelectedFeatures(null)
         setSelectedFeature([])
@@ -153,7 +153,7 @@ const AddProjectModal = () => {
                     </div>
 
                     <h1 className='text-xl font-semibold my-4'>Privacy Level</h1>
-                    <div className='grid grid-cols-3 gap-2'>
+                    <div className='grid grid-cols-2 gap-8'>
                         {
                             privacy.map((priv, key) => {
                                 return (
@@ -183,11 +183,11 @@ const AddProjectModal = () => {
                     <h1 className='text-xl font-semibold my-4'>Manage your Team</h1>
 
                     <div className='grid grid-cols-2 gap-8'>
-                        <div>
-                            <FormControl sx={{ m: 1, width: 400 }}>
-                                <TextField value={projectOwner} onChange={(event) => setProjectOwner(event.target.value)} id="outlined-basic" color='success' label="Project Owner" variant="outlined" />
-                            </FormControl>
+                        
+                        <div className='mt-2'>
+                            <Autocomplete id="feature-select" multiple options={names} value={ownerName} onChange={handleOwner} renderInput={(params) => (<TextField {...params} label="Select Owner" variant="outlined" color='success' />)} />
                         </div>
+
                         <div className='mt-2'>
                             <Autocomplete id="feature-select" multiple options={names} value={personName} onChange={handleChange} renderInput={(params) => (<TextField {...params} label="Select Team" variant="outlined" color='success' />)} />
                         </div>

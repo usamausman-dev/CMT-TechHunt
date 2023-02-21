@@ -48,11 +48,11 @@ const AddScrumModal = () => {
                 icon: 'fa-solid fa-lock'
             },
 
-            {
-                name: 'Secret',
-                details: 'Nobody can view this team in the list. Team membership is by invitation only.',
-                icon: 'fa-solid fa-eye'
-            }
+            // {
+            //     name: 'Secret',
+            //     details: 'Nobody can view this team in the list. Team membership is by invitation only.',
+            //     icon: 'fa-solid fa-eye'
+            // }
         ]
     )
 
@@ -191,7 +191,7 @@ const AddScrumModal = () => {
                     </div>
 
                     <h1 className='text-xl font-semibold my-4'>Privacy Level</h1>
-                    <div className='grid grid-cols-3 gap-2'>
+                    <div className='grid grid-cols-2 gap-8'>
                     {
                             privacy.map((priv, key) => {
                                 return (
