@@ -24,6 +24,15 @@ const Sidebar = () => {
         { title: "Hierarchy", link: '/hierarchy', icon: 'fa-solid fa-sitemap' },
         { title: "Settings", link: '/settings', icon: 'fa-solid fa-gear' },
     ]
+
+
+
+    // const Menus = [
+    //     { title: "Dashboard", link: '/dashboard', icon: 'fa-solid fa-table-columns' },
+    //     { title: "Projects", link: '/projects', icon: "fa-solid fa-list-check" },
+    //     { title: "Team", link: '/team', icon: 'fa-solid fa-users' },
+    //     { title: "Settings", link: '/settings', icon: 'fa-solid fa-gear' },
+    // ]
     
     return (
         <div className={`${open ? "w-72" : "w-20"} duration-300 h-screen p-5 pt-8 bg-gray-50 relative`}>

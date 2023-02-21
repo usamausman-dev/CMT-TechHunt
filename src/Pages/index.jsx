@@ -11,3 +11,6 @@ export { default as ProjectManager } from './ProjectManager';
 export { default as Projects } from './Projects';
 export { default as Settings } from './Settings';
 export { default as Team } from './Team';
+
+export { default as PmDashboard } from './PmDashboard';
+

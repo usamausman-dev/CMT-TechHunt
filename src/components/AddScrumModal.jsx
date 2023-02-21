@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
@@ -34,27 +37,21 @@ const AddScrumModal = () => {
     const [projectOwner, setProjectOwner] = useState('')
 
 
-    const [privacy, setPrivacy] = useState(
-        [
-            {
-                name: 'Public',
-                details: 'Team is Public, any employee can join and view the team details',
-                icon: 'fa-regular fa-folder'
-            },
+   
 
-            {
-                name: 'Private',
-                details: 'Team is Private, access is by invitation only',
-                icon: 'fa-solid fa-lock'
-            },
+    const privacy = [
+        {
+            name: 'Public',
+            details: 'Team is Public, any employee can join and view the team details',
+            icon: 'fa-regular fa-folder'
+        },
 
-            // {
-            //     name: 'Secret',
-            //     details: 'Nobody can view this team in the list. Team membership is by invitation only.',
-            //     icon: 'fa-solid fa-eye'
-            // }
-        ]
-    )
+        {
+            name: 'Private',
+            details: 'Team is Private, access is by invitation only',
+            icon: 'fa-solid fa-lock'
+        }
+    ]
 
     const features = [
         { name: 'Pakistan', feature: ['Lahore', 'Karachi', 'Islamabad'] },
@@ -63,16 +60,24 @@ const AddScrumModal = () => {
     ];
 
 
+    const [dept, setDept] = useState([])
+
+    const departments = ['UI-UX', 'Frontend', 'Backend', 'SQA']
+
+    const [brand, setBrand] = useState("")
+
+    const brands = [
+        'Ali Baba',
+        'Daraz'
+    ]
+
+    const [client, setClient] = useState("")
+    const clients = ['abc', 'def']
+
+
+
     const [selectedPrivacy, setSelectedPrivacy] = useState([])
-    const [selectedFeatures, setSelectedFeatures] = useState(null);
-    const [selectedFeature, setSelectedFeature] = useState([]);
 
-    const handleCountryChange = (event, newValue) => {
-        setSelectedFeatures(newValue);
-        setSelectedFeature([]);
-    };
-
-    const handleFeatureChange = (event, newValue) => setSelectedFeature(newValue)
 
     const [developmentTeam, setDevelopmentTeam] = useState([]);
     const [employee, setEmployee] = useState([]);
@@ -107,12 +112,10 @@ const AddScrumModal = () => {
 
 
     const handleEvent = () => {
-        const payload = { scrumName, developmentTeam, employee, description, startDate, endDate, scrumMaster, selectedPrivacy, selectedFeatures, selectedFeature, projectOwner }
+        const payload = { scrumName,dept, brand, client, developmentTeam, employee, description, startDate, endDate, scrumMaster, selectedPrivacy, projectOwner }
         console.log(payload)
     }
 
-
-    // () => showScrumModal(false)
 
     const clearAll = () => {
         SetScrumName('')
@@ -122,14 +125,15 @@ const AddScrumModal = () => {
         setScrumMaster([])
         setProjectOwner('')
         setSelectedPrivacy([])
-        setSelectedFeatures(null)
-        setSelectedFeature([])
+        setBrand([])
+        setClient([])
+        setDept([])
         setDevelopmentTeam([])
         setEmployee([])
         showScrumModal(false)
     }
 
-    const handleClose = () =>{
+    const handleClose = () => {
         clearAll()
         showScrumModal(false)
 
@@ -174,25 +178,48 @@ const AddScrumModal = () => {
 
                     <h1 className='text-xl font-semibold my-4'>Features</h1>
 
-                    <div className='grid grid-cols-2 gap-4'>
-                        <Autocomplete id="feature-category-select" options={features} getOptionLabel={(option) => option.name} isOptionEqualToValue={(option, value) => option.name === value.name} value={selectedFeatures} onChange={handleCountryChange}
-                            renderInput={(params) => (
-                                <TextField {...params} label="Select a feature category" variant="outlined" color='success' />
-                            )}
-                        />
-                        {selectedFeatures && (
-                            <Autocomplete id="feature-select" multiple options={selectedFeatures.feature} value={selectedFeature} onChange={handleFeatureChange}
-                                renderInput={(params) => (
-                                    <TextField {...params} label="Select feature" variant="outlined" color='success' />
-                                )}
-                            />
-                        )}
+                  
 
+
+
+                    <div className='grid grid-cols-3 gap-4'>
+                        <div className='mt-2'>
+                            <Autocomplete id="feature-select" multiple options={departments} value={dept} onChange={(event, newValue) => setDept(newValue)} renderInput={(params) => (<TextField {...params} label="Department" variant="outlined" color='success' />)} />
+                        </div>
+
+                        <div>
+                            <FormControl sx={{ m: 1, minWidth: 250 }} >
+                                <InputLabel color='success' id="brands-label">Brands</InputLabel>
+                                <Select color='success' labelId="brands-label" id="brands" value={brand} onChange={(event) => setBrand(event.target.value)} autoWidth label="Brands">
+                                    <MenuItem value=""><em>None</em></MenuItem>
+                                    {
+                                        brands.map((val, key) => <MenuItem key={key} value={val}>{val}</MenuItem>)
+                                    }
+
+                                </Select>
+                            </FormControl>
+                        </div>
+
+
+                        <div>
+                            <FormControl sx={{ m: 1, minWidth: 250 }} >
+                                <InputLabel color='success' id="clients-label">Clients</InputLabel>
+                                <Select color='success' labelId="clients-label" id="clients" value={client} onChange={(event) => setClient(event.target.value)} autoWidth label="Clients">
+                                    <MenuItem value=""><em>None</em></MenuItem>
+                                    {
+                                        clients.map((val, key) => <MenuItem key={key} value={val}>{val}</MenuItem>)
+                                    }
+
+                                </Select>
+                            </FormControl>
+                        </div>
                     </div>
+
+
 
                     <h1 className='text-xl font-semibold my-4'>Privacy Level</h1>
                     <div className='grid grid-cols-2 gap-8'>
-                    {
+                        {
                             privacy.map((priv, key) => {
                                 return (
                                     <div key={key}>
@@ -245,7 +272,7 @@ const AddScrumModal = () => {
                         <div>
                             <Autocomplete multiple options={[]} freeSolo
                                 renderInput={
-                                    (params) => (<TextField {...params} label="Add values" variant="outlined" onKeyDown={handleKey} />)
+                                    (params) => (<TextField {...params} label="Stake Holders" variant="outlined" onKeyDown={handleKey} color="success" />)
                                 }
                                 value={employee}
                                 onChange={(event, newValue) => setEmployee(newValue)}

@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
@@ -10,7 +13,6 @@ const names = ['Uzair Usman', 'Usama Usman', 'Ameer Shaikh', 'Syed Tamoor', 'Abd
 
 const AddProjectModal = () => {
     const [projectModal, showProjectModal] = useState(false)
-
 
     const style = {
         position: 'absolute',
@@ -25,58 +27,51 @@ const AddProjectModal = () => {
         p: 4,
     };
 
+    const privacy = [
+        {
+            name: 'Public',
+            details: 'Team is Public, any employee can join and view the team details',
+            icon: 'fa-regular fa-folder'
+        },
+
+        {
+            name: 'Private',
+            details: 'Team is Private, access is by invitation only',
+            icon: 'fa-solid fa-lock'
+        },
+
+    ]
+
     const [projectName, SetProjectName] = useState('')
     const [description, setDescription] = useState('')
     const [startDate, setStartDate] = useState(new Date().toISOString().substr(0, 10));
     const [endDate, setEndDate] = useState('');
-    const [personName, setPersonName] = useState([]);
+    const [pmName, setPmName] = useState([]);
     const [ownerName, setOwnerName] = useState([]);
 
-    const handleChange = (event, newValue) => setPersonName(newValue)
-    const handleOwner = (event, newValue) => setOwnerName(newValue)
 
-    const [privacy, setPrivacy] = useState(
-        [
-            {
-                name: 'Public',
-                details: 'Team is Public, any employee can join and view the team details',
-                icon: 'fa-regular fa-folder'
-            },
 
-            {
-                name: 'Private',
-                details: 'Team is Private, access is by invitation only',
-                icon: 'fa-solid fa-lock'
-            },
 
-            // {
-            //     name: 'Secret',
-            //     details: 'Nobody can view this team in the list. Team membership is by invitation only.',
-            //     icon: 'fa-solid fa-eye'
-            // }
-        ]
-    )
+    const [dept, setDept] = useState([])
 
-    const features = [
-        { name: 'Pakistan', feature: ['Lahore', 'Karachi', 'Islamabad'] },
-        { name: 'India', feature: ['Delhi', 'Mumbai', 'Bangalore'] },
-        { name: 'USA', feature: ['New York', 'Los Angeles', 'Chicago'] },
-    ];
+    const departments = ['UI-UX', 'Frontend', 'Backend', 'SQA']
 
+    const [brand, setBrand] = useState("")
+
+    const brands = [
+        'Ali Baba',
+        'Daraz'
+    ]
+
+    const [client, setClient] = useState("")
+    const clients = ['abc', 'def']
 
     const [selectedPrivacy, setSelectedPrivacy] = useState(null)
-    const [selectedFeatures, setSelectedFeatures] = useState(null);
-    const [selectedFeature, setSelectedFeature] = useState([]);
-
-    const handleCountryChange = (event, newValue) => {
-        setSelectedFeatures(newValue);
-        setSelectedFeature([]);
-    };
 
 
 
     const handleEvent = () => {
-        const payload = { projectName, ownerName, description, startDate, endDate, personName, selectedPrivacy, selectedFeatures, selectedFeature }
+        const payload = { projectName, description, startDate, endDate, pmName, ownerName, dept, brand, client }
         console.log(payload)
     }
 
@@ -85,13 +80,13 @@ const AddProjectModal = () => {
         setDescription('')
         setStartDate(new Date().toISOString().substr(0, 10))
         setEndDate('')
-        setPersonName([])
+        setPmName([])
         setOwnerName([])
         setSelectedPrivacy([])
-        setSelectedFeatures(null)
-        setSelectedFeature([])
+        setBrand([])
+        setClient([])
+        setDept([])
         showProjectModal(false)
-
     }
 
     const handleClose = () => {
@@ -136,20 +131,37 @@ const AddProjectModal = () => {
 
                     <h1 className='text-xl font-semibold my-4'>Features</h1>
 
-                    <div className='grid grid-cols-2 gap-4'>
-                        <Autocomplete id="feature-category-select" options={features} getOptionLabel={(option) => option.name} isOptionEqualToValue={(option, value) => option.name === value.name} value={selectedFeatures} onChange={handleCountryChange}
-                            renderInput={(params) => (
-                                <TextField {...params} label="Select a feature category" variant="outlined" color='success' />
-                            )}
-                        />
-                        {selectedFeatures && (
-                            <Autocomplete id="feature-select" multiple options={selectedFeatures.feature} value={selectedFeature} onChange={(event, newValue) => setSelectedFeature(newValue)}
-                                renderInput={(params) => (
-                                    <TextField {...params} label="Select feature" variant="outlined" color='success' />
-                                )}
-                            />
-                        )}
+                    <div className='grid grid-cols-3 gap-4'>
+                        <div className='mt-2'>
+                            <Autocomplete id="feature-select" multiple options={departments} value={dept} onChange={(event, newValue) => setDept(newValue)} renderInput={(params) => (<TextField {...params} label="Department" variant="outlined" color='success' />)} />
+                        </div>
 
+                        <div>
+                            <FormControl sx={{ m: 1, minWidth: 250 }} >
+                                <InputLabel color='success' id="brands-label">Brands</InputLabel>
+                                <Select color='success' labelId="brands-label" id="brands" value={brand} onChange={(event) => setBrand(event.target.value)} autoWidth label="Brands">
+                                    <MenuItem value=""><em>None</em></MenuItem>
+                                    {
+                                        brands.map((val, key) => <MenuItem key={key} value={val}>{val}</MenuItem>)
+                                    }
+
+                                </Select>
+                            </FormControl>
+                        </div>
+
+
+                        <div>
+                            <FormControl sx={{ m: 1, minWidth: 250 }} >
+                                <InputLabel color='success' id="clients-label">Clients</InputLabel>
+                                <Select color='success' labelId="clients-label" id="clients" value={client} onChange={(event) => setClient(event.target.value)} autoWidth label="Clients">
+                                    <MenuItem value=""><em>None</em></MenuItem>
+                                    {
+                                        clients.map((val, key) => <MenuItem key={key} value={val}>{val}</MenuItem>)
+                                    }
+
+                                </Select>
+                            </FormControl>
+                        </div>
                     </div>
 
                     <h1 className='text-xl font-semibold my-4'>Privacy Level</h1>
@@ -183,13 +195,31 @@ const AddProjectModal = () => {
                     <h1 className='text-xl font-semibold my-4'>Manage your Team</h1>
 
                     <div className='grid grid-cols-2 gap-8'>
-                        
-                        <div className='mt-2'>
-                            <Autocomplete id="feature-select" multiple options={names} value={ownerName} onChange={handleOwner} renderInput={(params) => (<TextField {...params} label="Select Owner" variant="outlined" color='success' />)} />
+
+                        <div>
+                            <FormControl sx={{ m: 1, minWidth: 400 }} >
+                                <InputLabel color='success' id="owner-label">Owner</InputLabel>
+                                <Select color='success' labelId="owner-label" id="owner" value={ownerName} onChange={(event) => setOwnerName(event.target.value)} autoWidth label="Owner">
+                                    <MenuItem value=""><em>None</em></MenuItem>
+                                    {
+                                        names.map((val, key) => <MenuItem key={key} value={val}>{val}</MenuItem>)
+                                    }
+
+                                </Select>
+                            </FormControl>
                         </div>
 
-                        <div className='mt-2'>
-                            <Autocomplete id="feature-select" multiple options={names} value={personName} onChange={handleChange} renderInput={(params) => (<TextField {...params} label="Select Team" variant="outlined" color='success' />)} />
+                        <div>
+                            <FormControl sx={{ m: 1, minWidth: 400 }} >
+                                <InputLabel color='success' id="pm-label">Project Manager</InputLabel>
+                                <Select color='success' labelId="pm-label" id="pm" value={pmName} onChange={(event) => setPmName(event.target.value)} autoWidth label="Project Manager">
+                                    <MenuItem value=""><em>None</em></MenuItem>
+                                    {
+                                        names.map((val, key) => <MenuItem key={key} value={val}>{val}</MenuItem>)
+                                    }
+
+                                </Select>
+                            </FormControl>
                         </div>
                     </div>
 
