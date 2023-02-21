@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import CustomCheckBox from './CustomCheckBox'
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -64,22 +63,7 @@ const AddProjectModal = () => {
     ];
 
 
-    const [selectedPrivacy, setSelectedPrivacy] = useState([])
-    const getValues = (value, checked) => {
-
-        if (checked) {
-            selectedPrivacy.push(value)
-            setSelectedPrivacy(selectedPrivacy);
-        }
-
-        else {
-            let val_index = selectedPrivacy.indexOf(value)
-            selectedPrivacy.splice(val_index, 1)
-            setSelectedPrivacy(selectedPrivacy)
-        }
-
-    }
-
+    const [selectedPrivacy, setSelectedPrivacy] = useState(null)
     const [selectedFeatures, setSelectedFeatures] = useState(null);
     const [selectedFeature, setSelectedFeature] = useState([]);
 
@@ -88,14 +72,14 @@ const AddProjectModal = () => {
         setSelectedFeature([]);
     };
 
-    
+
 
     const handleEvent = () => {
         const payload = { projectName, projectOwner, description, startDate, endDate, personName, selectedPrivacy, selectedFeatures, selectedFeature }
         console.log(payload)
     }
 
-    const clearAll = () =>{
+    const clearAll = () => {
         SetProjectName('')
         setDescription('')
         setStartDate(new Date().toISOString().substr(0, 10))
@@ -110,7 +94,7 @@ const AddProjectModal = () => {
 
     }
 
-    const handleClose = () =>{
+    const handleClose = () => {
         clearAll()
         showProjectModal(false)
 
@@ -171,7 +155,28 @@ const AddProjectModal = () => {
                     <h1 className='text-xl font-semibold my-4'>Privacy Level</h1>
                     <div className='grid grid-cols-3 gap-2'>
                         {
-                            privacy.map((priv, key) => <CustomCheckBox key={key} name={priv.name} detail={priv.details} icon={priv.icon} getValues={getValues} />)
+                            privacy.map((priv, key) => {
+                                return (
+                                    <div key={key}>
+                                        <label style={{ cursor: 'pointer' }}>
+                                            <input type="checkbox" name='privacy' value={priv.name} onChange={(e) => setSelectedPrivacy(e.target.value)} style={{ display: 'none' }} />
+                                            <div className={priv.name === selectedPrivacy ? ('border-green-700/20 h-28 bg-green-300 rounded-3xl border-2') : ('border-green-700/20 h-28 bg-slate-100 rounded-3xl border-2')}>
+
+                                                <div className='flex items-center p-4'>
+                                                    <div className='bg-green-100 px-3 rounded-full py-2 text-green-700/50'><i className={priv.icon}></i></div>
+                                                    <div className='ml-4'>
+                                                        <h1 className='text-md'>{priv.name}</h1>
+                                                        <p className="text-xs">{priv.details}</p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                )
+                            }
+
+                            )
                         }
                     </div>
 
