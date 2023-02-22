@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Tab } from '@headlessui/react'
 import { AddProjectModal, AddScrumModal } from '../components'
+import axios from 'axios'
 
 
 function classNames(...classes) {
@@ -8,6 +9,26 @@ function classNames(...classes) {
 }
 
 const Projects = () => {
+    const [projects, setProjects] = useState([])
+
+    useEffect(() => {
+        const URL = "http://192.168.100.18:8121/api/project/get"
+        const token = "6|jOyFHeA4zQaxXlmDF8UdJfNkzDWicJ5QKM4hn035"
+
+
+        axios.get(URL, {
+            method: 'get',
+            headers: {
+                "Content-Type": 'application/json',
+                "Accept": 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify()
+        }).then((res) => {
+            setProjects(res.data.data)
+        });
+
+    }, [])
 
     return (
         <div >
@@ -39,35 +60,26 @@ const Projects = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr className='shadow-lg rounded-md bg-gray-50'>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                    </tr>
 
-                                    <tr className='shadow-lg rounded-md bg-gray-50'>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                    </tr>
+                                    {
+                                        projects.map((project, key) => {
+                                            return (
+                                                <tr onClick={() => window.location.href="/finance"} key={key} className='shadow-lg rounded-md bg-gray-50 hover:cursor-pointer'>
+                                                    <td>{project.name}</td>
+                                                    <td>{project.brand.name}</td>
+                                                    <td>{project.client.name}</td>
+                                                    <td>{project.manager.name}</td>
+                                                    <td>Lorem Ipsum</td>
+                                                    <td>{project.start_date}</td>
+                                                    <td>{project.end_date}</td>
+                                                </tr>
 
-                                    <tr className='shadow-lg rounded-md bg-gray-50'>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                        <td>Lorem Ipsum</td>
-                                    </tr>
+                                            )
+                                        })
+                                    }
+
+
+
 
 
                                 </tbody>

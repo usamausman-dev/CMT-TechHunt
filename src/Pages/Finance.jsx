@@ -23,9 +23,9 @@ const Finance = () => {
 
             <div className='flex items-center'>
               <input className='bg-gray-200 px-3 py-1 rounded-md' type="text" placeholder='Search' />
-              <i class="fa-solid fa-magnifying-glass mx-2 text-gray-400"></i>
-              <i class="fa-solid fa-sliders mx-2 text-gray-400"></i>
-              <i class="fa-solid fa-filter mx-2 text-gray-400"></i>
+              <i className="fa-solid fa-magnifying-glass mx-2 text-gray-400"></i>
+              <i className="fa-solid fa-sliders mx-2 text-gray-400"></i>
+              <i className="fa-solid fa-filter mx-2 text-gray-400"></i>
 
             </div>
 
@@ -138,7 +138,7 @@ const Finance = () => {
       <div className='shadow-xl mt-4 w-[300px] rounded-xl p-7'>
         <div className='flex justify-between'>
           <h1 className='text-xl font-bold'>Balances</h1>
-          <button className='bg-[#74c27b] text-white px-2 rounded-lg'><i class="fa-solid fa-plus"></i></button>
+          <button className='bg-[#74c27b] text-white px-2 rounded-lg'><i className="fa-solid fa-plus"></i></button>
         </div>
         <div className='flex items-center'>
           <span className='text-[#74c27b] text-xl font-bold mr-1'>$</span><span>Dollar</span>

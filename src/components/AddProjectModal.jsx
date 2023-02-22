@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import InputLabel from '@mui/material/InputLabel';
@@ -7,9 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-
-const names = ['Uzair Usman', 'Usama Usman', 'Ameer Shaikh', 'Syed Tamoor', 'Abdul Sami', 'Kashif', 'Sufyan'];
-
+import axios from 'axios'
 
 const AddProjectModal = () => {
     const [projectModal, showProjectModal] = useState(false)
@@ -44,35 +42,72 @@ const AddProjectModal = () => {
 
     const [projectName, SetProjectName] = useState('')
     const [description, setDescription] = useState('')
-    const [startDate, setStartDate] = useState(new Date().toISOString().substr(0, 10));
+    const [startDate, setStartDate] = useState(new Date().toISOString().substr(0, 19));
     const [endDate, setEndDate] = useState('');
     const [pmName, setPmName] = useState([]);
     const [ownerName, setOwnerName] = useState([]);
+
+    const [names, setNames] = useState([])
 
 
 
 
     const [dept, setDept] = useState([])
-
-    const departments = ['UI-UX', 'Frontend', 'Backend', 'SQA']
+    const [departments, setDepartments] = useState([]) //fetched data
 
     const [brand, setBrand] = useState("")
+    const [brands, setBrands] = useState([])
 
-    const brands = [
-        'Ali Baba',
-        'Daraz'
-    ]
+
 
     const [client, setClient] = useState("")
-    const clients = ['abc', 'def']
+    const [clients, setClients] = useState([])
+
+
 
     const [selectedPrivacy, setSelectedPrivacy] = useState(null)
 
 
 
     const handleEvent = () => {
-        const payload = { projectName, description, startDate, endDate, pmName, ownerName, dept, brand, client }
-        console.log(payload)
+        const deptId = dept.map((option) => {
+            const item = departments.find((item) => item.name === option);
+            return item ? item.id : null;
+        });
+
+
+
+
+        const payload = {
+            "title": projectName,
+            "description": description,
+            "start_date": startDate.replaceAll("T"," "),
+            "end_date": endDate.replaceAll("T"," "),
+            "client_id": client,
+            "brand_id": brand,
+            "departments": deptId,
+            "security": selectedPrivacy,
+            "project_creator": ownerName,
+            "project_manager": pmName
+        }
+
+      
+
+        const token = "6|jOyFHeA4zQaxXlmDF8UdJfNkzDWicJ5QKM4hn035"
+
+        let config = {
+            headers: {
+                "Content-Type": 'application/json',
+                "Accept": 'application/json',
+                Authorization: `Bearer ${token}`,
+                authorization: `Bearer ${token}`
+            },
+        }
+
+        axios.post("http://192.168.100.18:8121/api/project/create", payload, config).then((res) => {
+            handleClose()
+            window.location.reload(false)
+        })
     }
 
     const clearAll = () => {
@@ -97,10 +132,37 @@ const AddProjectModal = () => {
 
 
 
+
+    const openModal = () => {
+        const URL = "http://192.168.100.18:8121/api/project/create-get"
+        const token = "6|jOyFHeA4zQaxXlmDF8UdJfNkzDWicJ5QKM4hn035"
+        axios.get(URL, {
+            method: 'get',
+            headers: {
+                "Content-Type": 'application/json',
+                "Accept": 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify()
+        }).then((res) => {
+            setDepartments(res.data.data.departments)
+            setBrands(res.data.data.brands)
+            setClients(res.data.data.clients)
+            setNames(res.data.data.users)
+            showProjectModal(true)
+        });
+    }
+
+    const changeDept = (event, newValue) => {
+        setDept(newValue)
+    }
+
+
+
     return (
         <>
             <div className='flex justify-end'>
-                <button onClick={() => showProjectModal(true)} className='absolute top-32 mb-8 px-4 py-2 font-semibold rounded-md bg-[#72c179] text-white'>Create +</button>
+                <button onClick={openModal} className='absolute top-32 mb-8 px-4 py-2 font-semibold rounded-md bg-[#72c179] text-white'>Create +</button>
             </div>
             <Modal open={projectModal} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                 <Box sx={style}>
@@ -118,14 +180,14 @@ const AddProjectModal = () => {
                     <div className='flex justify-between items-center px-2  text-md'>
                         <div>
                             <label>Date:</label>
-                            <input value={startDate} onChange={(e) => setStartDate(e.target.value)} type="date" name="start" className='border-green-700/20 border-2 bg-gray-100 px-4 py-2 ml-4 rounded-xl' />
+                            <input value={startDate} onChange={(e) => setStartDate(e.target.value)} type="datetime" name="start" className='border-green-700/20 border-2 bg-gray-100 px-4 py-2 ml-4 rounded-xl' />
                         </div>
 
                         <span><i className="fa-solid fa-minus"></i></span>
 
                         <div>
                             <label>End Date:</label>
-                            <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} name="end" className='border-green-700/20 border-2 bg-gray-100 px-4 py-2 ml-4 rounded-xl' />
+                            <input type="datetime" value={endDate} onChange={(e) => setEndDate(e.target.value)} name="end" className='border-green-700/20 border-2 bg-gray-100 px-4 py-2 ml-4 rounded-xl' />
                         </div>
                     </div>
 
@@ -133,7 +195,9 @@ const AddProjectModal = () => {
 
                     <div className='grid grid-cols-3 gap-4'>
                         <div className='mt-2'>
-                            <Autocomplete id="feature-select" multiple options={departments} value={dept} onChange={(event, newValue) => setDept(newValue)} renderInput={(params) => (<TextField {...params} label="Department" variant="outlined" color='success' />)} />
+                            <Autocomplete id="feature-select" multiple
+                                options={departments.map((option) => option.name)}
+                                value={dept} onChange={changeDept} renderInput={(params) => (<TextField {...params} label="Department" variant="outlined" color='success' />)} />
                         </div>
 
                         <div>
@@ -142,7 +206,7 @@ const AddProjectModal = () => {
                                 <Select color='success' labelId="brands-label" id="brands" value={brand} onChange={(event) => setBrand(event.target.value)} autoWidth label="Brands">
                                     <MenuItem value=""><em>None</em></MenuItem>
                                     {
-                                        brands.map((val, key) => <MenuItem key={key} value={val}>{val}</MenuItem>)
+                                        brands?.map((val, key) => <MenuItem key={key} value={val.id}>{val.name}</MenuItem>)
                                     }
 
                                 </Select>
@@ -156,7 +220,7 @@ const AddProjectModal = () => {
                                 <Select color='success' labelId="clients-label" id="clients" value={client} onChange={(event) => setClient(event.target.value)} autoWidth label="Clients">
                                     <MenuItem value=""><em>None</em></MenuItem>
                                     {
-                                        clients.map((val, key) => <MenuItem key={key} value={val}>{val}</MenuItem>)
+                                        clients.map((val, key) => <MenuItem key={key} value={val.id}>{val.name}</MenuItem>)
                                     }
 
                                 </Select>
@@ -202,7 +266,7 @@ const AddProjectModal = () => {
                                 <Select color='success' labelId="owner-label" id="owner" value={ownerName} onChange={(event) => setOwnerName(event.target.value)} autoWidth label="Owner">
                                     <MenuItem value=""><em>None</em></MenuItem>
                                     {
-                                        names.map((val, key) => <MenuItem key={key} value={val}>{val}</MenuItem>)
+                                        names.map((val, key) => <MenuItem key={key} value={val.id}>{val.name}</MenuItem>)
                                     }
 
                                 </Select>
@@ -215,7 +279,7 @@ const AddProjectModal = () => {
                                 <Select color='success' labelId="pm-label" id="pm" value={pmName} onChange={(event) => setPmName(event.target.value)} autoWidth label="Project Manager">
                                     <MenuItem value=""><em>None</em></MenuItem>
                                     {
-                                        names.map((val, key) => <MenuItem key={key} value={val}>{val}</MenuItem>)
+                                        names.map((val, key) => <MenuItem key={key} value={val.id}>{val.name}</MenuItem>)
                                     }
 
                                 </Select>
