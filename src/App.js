@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Sidebar, NavBar } from './components';
-import { PmDashboard, Accounts, Clients, Complaints, Dashboard, Finance, Hierarchy, HRM, Messages, NewLeads, ProjectManager, Projects, Settings, Team } from './Pages'
+import { Project,PmDashboard, Accounts, Clients, Complaints, Dashboard, Finance, Hierarchy, HRM, Messages, NewLeads, ProjectManager, Projects, Settings, Team } from './Pages'
 
 export default function App() {
   const user = true
@@ -36,6 +36,7 @@ export default function App() {
                       <Route path='/project-manager' element={(<ProjectManager />)} />
                       <Route path='/hrm' element={(<HRM />)} />
                       <Route path='/projects' element={(<Projects />)} />
+                      <Route path='/project/:projectId' element={(<Project />)} />
                       <Route path='/finance' element={(<Finance />)} />
                       <Route path='/accounts' element={(<Accounts />)} />
                       <Route path='/complaints' element={(<Complaints />)} />

@@ -13,4 +13,5 @@ export { default as Settings } from './Settings';
 export { default as Team } from './Team';
 
 export { default as PmDashboard } from './PmDashboard';
+export { default as Project } from './Project';
 

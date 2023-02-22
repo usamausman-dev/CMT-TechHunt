@@ -64,7 +64,7 @@ const Projects = () => {
                                     {
                                         projects.map((project, key) => {
                                             return (
-                                                <tr onClick={() => window.location.href="/finance"} key={key} className='shadow-lg rounded-md bg-gray-50 hover:cursor-pointer'>
+                                                <tr onClick={() => window.location.href=`/project/${project.id}`} key={key} className='shadow-lg rounded-md bg-gray-50 hover:cursor-pointer'>
                                                     <td>{project.name}</td>
                                                     <td>{project.brand.name}</td>
                                                     <td>{project.client.name}</td>
