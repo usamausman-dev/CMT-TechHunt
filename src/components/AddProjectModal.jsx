@@ -180,14 +180,14 @@ const AddProjectModal = () => {
                     <div className='flex justify-between items-center px-2  text-md'>
                         <div>
                             <label>Date:</label>
-                            <input value={startDate} onChange={(e) => setStartDate(e.target.value)} type="datetime" name="start" className='border-green-700/20 border-2 bg-gray-100 px-4 py-2 ml-4 rounded-xl' />
+                            <input value={startDate} onChange={(e) => setStartDate(e.target.value)} type="datetime-local" name="start" className='border-green-700/20 border-2 bg-gray-100 px-4 py-2 ml-4 rounded-xl' />
                         </div>
 
                         <span><i className="fa-solid fa-minus"></i></span>
 
                         <div>
                             <label>End Date:</label>
-                            <input type="datetime" value={endDate} onChange={(e) => setEndDate(e.target.value)} name="end" className='border-green-700/20 border-2 bg-gray-100 px-4 py-2 ml-4 rounded-xl' />
+                            <input type="datetime-local" value={endDate} onChange={(e) => setEndDate(e.target.value)} name="end" className='border-green-700/20 border-2 bg-gray-100 px-4 py-2 ml-4 rounded-xl' />
                         </div>
                     </div>
 
