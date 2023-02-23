@@ -8,21 +8,35 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import TaskModal from '../components/TaskModal';
+
+import CreateTask from '../components/CreateTask';
+import CreateSubTask from '../components/CreateSubTask';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
+    <div role="tabpanel" hidden={value !== index} id={`vertical-tabpanel-${index}`} aria-labelledby={`vertical-tab-${index}`}   {...other}>
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <table width="" className='text-center border-separate border-spacing-y-3.5 w-[1300px]' cellPadding="20px">
+            <thead className='text-[#707eae]'>
+              <tr >
+                <th>Task</th>
+                <th>Assign To</th>
+                <th>Start Date</th>
+                <th>Due Date</th>
+                <th>View Details</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {children}
+            </tbody>
+          </table>
+
+          {/* <Typography>{children}</Typography> */}
         </Box>
       )}
     </div>
@@ -74,13 +88,14 @@ export default function VerticalTabs() {
         </div>
 
         <div>
+
           <Button sx={{ background: '#72c179', fontWeight: 700, color: 'white', padding: '10px 20px' }} id="basic-button" aria-controls={open ? 'basic-menu' : undefined} aria-haspopup="true" aria-expanded={open ? 'true' : undefined} onClick={handleClick}>
-            Create <i class="ml-3 fa-solid fa-plus"></i>
+            Create <i className="ml-3 fa-solid fa-plus"></i>
           </Button>
 
           <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{ 'aria-labelledby': 'basic-button' }}>
-            <MenuItem onClick={handleClose}>New Task</MenuItem>
-            <MenuItem onClick={handleClose}>Sub-Task</MenuItem>
+            <MenuItem ><CreateTask /></MenuItem>
+            <MenuItem ><CreateSubTask /></MenuItem>
           </Menu>
         </div>
 
@@ -89,13 +104,32 @@ export default function VerticalTabs() {
       <Box className="shadow-2xl" sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '67vh', borderRadius: '20px' }}>
         <Tabs className='py-6' TabIndicatorProps={{ style: { backgroundColor: "#72c179", width: '5px' } }} orientation="vertical" variant="standard" value={value} onChange={handleChange} aria-label="Vertical tabs example" sx={{ borderRight: 1, borderColor: 'divider', width: '250px' }}>
           {
-            projects.map((val, key) => <Tab label={val} {...a11yProps({ key })} />)
+            projects.map((val, key) => <Tab key={key} label={val} {...a11yProps(key)} />)
           }
+
+
+
+
+
+
         </Tabs>
 
         {
-          projects.map((val, key) => <TabPanel value={value} index={key}>{val}</TabPanel>)
+          projects.map((val, key) =>
+            <TabPanel value={value} index={key} key={key}>
+              <tr className='shadow-lg rounded-md bg-gray-50'>
+                <td>1 {val}</td>
+                <td>2 {val}</td>
+                <td>3 {val}</td>
+                <td>4 {val}</td>
+                <td><TaskModal /></td>
+
+              </tr>
+
+            </TabPanel>)
         }
+
+
       </Box>
     </div>
   );
