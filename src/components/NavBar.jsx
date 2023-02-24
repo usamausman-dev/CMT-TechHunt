@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ClockIcon from '../assests/icons/clock.png'
 import MicIcon from '../assests/icons/mic.png'
 import BellIcon from '../assests/icons/bell.png'
 
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
+import Appreciation from './Appreciation';
+import Announcement from './Announcement';
+
 
 const NavBar = () => {
+
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
   return (
     <div className=' rounded-md py-4 px-6 mb-4 flex justify-between items-center'>
       <div>
@@ -21,7 +41,19 @@ const NavBar = () => {
       <div className='flex items-center'>
 
         <div><img src={ClockIcon} alt="clock" /></div>
-        <div><img src={MicIcon} alt="MicIcon" /></div>
+        <div>
+
+          <Button sx={{p:0}} id="basic-button" aria-controls={open ? 'basic-menu' : undefined} aria-haspopup="true" aria-expanded={open ? 'true' : undefined} onClick={handleClick}>
+            <img src={MicIcon} alt="MicIcon" />
+          </Button>
+
+          <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{ 'aria-labelledby': 'basic-button' }}>
+            <MenuItem sx={{p:0}}><Appreciation/></MenuItem>
+            <MenuItem sx={{p:0}}><Announcement/></MenuItem>
+
+          </Menu>
+        </div>
+
         <div><img src={BellIcon} alt="BellIcon" /></div>
 
 
