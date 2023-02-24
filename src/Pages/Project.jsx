@@ -1,21 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import TaskModal from '../components/TaskModal';
-
 import CreateTask from '../components/CreateTask';
-import CreateSubTask from '../components/CreateSubTask';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div role="tabpanel" hidden={value !== index} id={`vertical-tabpanel-${index}`} aria-labelledby={`vertical-tab-${index}`}   {...other}>
       {value === index && (
@@ -28,15 +20,12 @@ function TabPanel(props) {
                 <th>Start Date</th>
                 <th>Due Date</th>
                 <th>View Details</th>
-
               </tr>
             </thead>
             <tbody>
               {children}
             </tbody>
           </table>
-
-          {/* <Typography>{children}</Typography> */}
         </Box>
       )}
     </div>
@@ -63,24 +52,13 @@ export default function VerticalTabs() {
     setValue(newValue);
   };
 
-
-
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-
   const projects = ['HRM', 'SQA', 'Frontend', 'Backend', 'Marketing']
 
   return (
     <div className='p-7 bg-gray-200 rounded-xl border border-[#72c179]'>
+
       <div className='flex justify-between items-center mb-10 mx-10'>
-        <div className='text-2xl font-semibold'>Project Name</div>
+        <div className='text-2xl font-semibold'>Tasks- Project Name</div>
         <div className='flex items-center bg-slate-100 p-1 rounded-md shadow-sm'>
           <i className="fa-solid fa-magnifying-glass mx-2 text-gray-300"></i>
           <input className='bg-slate-100 px-3 py-1 rounded-md' type="text" placeholder='Search' />
@@ -88,29 +66,13 @@ export default function VerticalTabs() {
         </div>
 
         <div>
-
-          <Button sx={{ background: '#72c179', fontWeight: 700, color: 'white', padding: '10px 20px' }} id="basic-button" aria-controls={open ? 'basic-menu' : undefined} aria-haspopup="true" aria-expanded={open ? 'true' : undefined} onClick={handleClick}>
-            Create <i className="ml-3 fa-solid fa-plus"></i>
-          </Button>
-
-          <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{ 'aria-labelledby': 'basic-button' }}>
-            <MenuItem ><CreateTask /></MenuItem>
-            <MenuItem ><CreateSubTask /></MenuItem>
-          </Menu>
+          <CreateTask />
         </div>
-
-
       </div>
+
       <Box className="shadow-2xl" sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '67vh', borderRadius: '20px' }}>
         <Tabs className='py-6' TabIndicatorProps={{ style: { backgroundColor: "#72c179", width: '5px' } }} orientation="vertical" variant="standard" value={value} onChange={handleChange} aria-label="Vertical tabs example" sx={{ borderRight: 1, borderColor: 'divider', width: '250px' }}>
-          {
-            projects.map((val, key) => <Tab key={key} label={val} {...a11yProps(key)} />)
-          }
-
-
-
-
-
+          {projects.map((val, key) => <Tab key={key} label={val} {...a11yProps(key)} />)}
 
         </Tabs>
 
@@ -123,9 +85,7 @@ export default function VerticalTabs() {
                 <td>3 {val}</td>
                 <td>4 {val}</td>
                 <td><TaskModal /></td>
-
               </tr>
-
             </TabPanel>)
         }
 

@@ -1,4 +1,8 @@
 import React from 'react'
+import ClockIcon from '../assests/icons/clock.png'
+import MicIcon from '../assests/icons/mic.png'
+import BellIcon from '../assests/icons/bell.png'
+
 
 const NavBar = () => {
   return (
@@ -15,21 +19,12 @@ const NavBar = () => {
         <div className='ml-4'><i className="fa-solid fa-filter"></i></div>
       </div>
       <div className='flex items-center'>
-        <div>
-          <i className="fa-regular fa-clock p-4 mx-4  rounded-md shadow-sm bg-gray-50 border-green-700/20 border-2">
-          </i>
-          {/* <div className='w-[10px] h-[10px] bg-red-500 absolute top-12 right-[23rem] rounded-full'></div> */}
-        </div>
 
-        <div>
-          <i className="fa-solid fa-bullhorn p-4 mx-4 rounded-md shadow-sm bg-gray-50 border-green-700/20 border-2"></i>
-          {/* <div className='w-[10px] h-[10px] bg-red-500 absolute top-12 right-[18rem] rounded-full'></div> */}
-        </div>
+        <div><img src={ClockIcon} alt="clock" /></div>
+        <div><img src={MicIcon} alt="MicIcon" /></div>
+        <div><img src={BellIcon} alt="BellIcon" /></div>
 
-        <div>
-          <i className="fa-regular fa-bell p-4 mx-4 rounded-md shadow-sm bg-gray-50 border-green-700/20 border-2"></i>
-          {/* <div className='w-[10px] h-[10px] bg-red-500 absolute top-12 right-[13rem] rounded-full'></div> */}
-        </div>
+
         <div className='mx-4 font-semibold'>TecHunt</div>
         <div>
           <img alt='user' className='w-14 h-14 rounded-md' src='https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80' />

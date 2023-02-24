@@ -29,11 +29,6 @@ const CreateTask = () => {
     const [title, SetTitle] = useState("")
     const [description, setDescription] = useState("")
 
-
-
-
-
-
     const handleClickOpen = () => {
         // setOpen(true);
         const URL = "http://192.168.100.18:8121/api/project/create-get"
@@ -56,21 +51,17 @@ const CreateTask = () => {
     const handleClose = () => {
         setOpen(false);
     };
+
     const submitTask = () => {
-        const payload = {
-
-            title, description, startDate, endDate, dept, name
-        }
-
+        const payload = { title, description, startDate, endDate, dept, name }
         console.log(payload)
-
     }
 
 
     return (
         <div>
-            <Button variant="standard" onClick={handleClickOpen}>
-                New Task
+            <Button sx={{ background: '#72c179', fontWeight: 700, color: 'white', padding: '10px 20px' }} variant="standard" onClick={handleClickOpen}>
+                Create <i className="ml-3 fa-solid fa-plus"></i>
             </Button>
             <Dialog fullWidth={true}
                 maxWidth="md" open={open} onClose={handleClose}>
@@ -117,12 +108,6 @@ const CreateTask = () => {
                     <div className='flex justify-center'>
                         <button className='bg-[#72c179] mt-10 px-6 py-2 text-white rounded-lg' onClick={submitTask}>Submit</button>
                     </div>
-
-
-
-
-
-
                 </DialogContent>
 
             </Dialog>
