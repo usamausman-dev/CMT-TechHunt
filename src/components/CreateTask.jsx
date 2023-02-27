@@ -63,8 +63,7 @@ const CreateTask = () => {
             <Button sx={{ background: '#72c179', fontWeight: 700, color: 'white', padding: '10px 20px' }} variant="standard" onClick={handleClickOpen}>
                 Create <i className="ml-3 fa-solid fa-plus"></i>
             </Button>
-            <Dialog fullWidth={true}
-                maxWidth="md" open={open} onClose={handleClose}>
+            <Dialog fullWidth={true} maxWidth="md" open={open} onClose={handleClose}>
                 <DialogTitle>
                     <div className='flex justify-between'>
                         <div>Task</div>

@@ -31,9 +31,10 @@ const Projects = () => {
     }, [])
 
     return (
-        <div >
+        <div>
             <Tab.Group>
-                <Tab.List className="flex space-x-1 ">
+
+                <Tab.List className="flex space-x-1 border-b-2 border-slate-100">
                     <Tab className={({ selected }) => classNames('rounded-lg py-2.5 mx-8 text-md font-bold leading-5', 'ring-transparent ring-opacity-60 ring-offset-2 ring-offset-transparent focus:outline-none focus:ring-2',
                         selected ? 'text-[#72c179] border-b-4 rounded-none border-[#72c179]' : '')
                     }>Projects</Tab>
@@ -42,8 +43,10 @@ const Projects = () => {
                         selected ? 'text-[#72c179] border-b-4 rounded-none border-[#72c179]' : '')
                     }>Scrum</Tab>
                 </Tab.List>
-                <hr className='' />
-                <Tab.Panels>
+
+
+                {/* <hr className='' /> */}
+                <Tab.Panels >
                     <Tab.Panel>
                         <div className='w-100 my-6'>
                             <AddProjectModal />

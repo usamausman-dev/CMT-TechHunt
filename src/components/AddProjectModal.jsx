@@ -162,7 +162,7 @@ const AddProjectModal = () => {
     return (
         <>
             <div className='flex justify-end'>
-                <button onClick={openModal} className='absolute top-32 mb-8 px-4 py-2 font-semibold rounded-md bg-[#72c179] text-white'>Create +</button>
+                <button onClick={openModal} className=' -mt-12 px-4 py-2 font-semibold rounded-md bg-[#72c179] text-white'>Create +</button>
             </div>
             <Modal open={projectModal} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                 <Box sx={style}>
